@@ -1,5 +1,6 @@
 const PlayMusic = require('playmusic');
 const secret = require('../../config/secret.json');
+const Logger = require('./Logger');
 
 const email = secret.email;
 const password = secret.password;
@@ -19,18 +20,24 @@ class PlayList {
 
   static getAllTracks(pm) {
     return new Promise((resolve) => {
-      console.log('Get all tracks.');
+      Logger.info('Get all tracks.');
 
       pm.init({
         email,
         password,
       }, (err) => {
-        if (err) throw err;
+        if (err) {
+          Logger.error('Failed to init playmusic.', err);
+          throw err;
+        }
 
         pm.getAllTracks((getErr, library) => {
-          if (getErr) throw getErr;
+          if (getErr) {
+            Logger.error('Failed to get tracks.', getErr);
+            throw getErr;
+          }
 
-          console.log('all tracks length:', library.data.items.length);
+          Logger.info('all tracks length:', library.data.items.length);
 
           // Remove unused data
           const playList = library.data.items.map(item => ({
@@ -47,12 +54,12 @@ class PlayList {
 
   select() {
     return new Promise((resolve) => {
-      console.log('Select songs.');
+      Logger.info('Select songs.');
 
       const randomIndex = Math.floor(Math.random() * this.songs.length);
       const song = this.songs[randomIndex];
 
-      console.log('song:', `${song.artist} ${song.title}`);
+      Logger.info('song:', `${song.artist} ${song.title}`);
 
       resolve(this.getStreamUrl(song));
     });
@@ -61,7 +68,10 @@ class PlayList {
   getStreamUrl(song) {
     return new Promise((resolve) => {
       this.pm.getStreamUrl(song.id, (err, streamUrl) => {
-        if (err) throw err;
+        if (err) {
+          Logger.error('Failed to get stream url.', err);
+          throw err;
+        }
         resolve(streamUrl);
       });
     });

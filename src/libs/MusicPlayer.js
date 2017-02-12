@@ -3,6 +3,7 @@ const path = require('path');
 const request = require('request');
 const player = require('play-sound')({});
 
+const Logger = require('./Logger');
 const PlayList = require('./PlayList');
 
 const tmpFolder = path.join(__dirname, '../tmp');
@@ -39,12 +40,15 @@ class MusicPlayer {
 
   static startPlayer() {
     return new Promise((resolve, reject) => {
-      console.log('im playing...');
+      Logger.info('im playing...');
 
       player.play(tmpFilePath, (err) => {
-        if (err) reject(err);
+        if (err) {
+          Logger.error('Failed to start player.', err);
+          reject(err);
+        }
 
-        console.log('play done, switching to next one ...');
+        Logger.info('play done, switching to next one ...');
         return resolve();
       });
     });
