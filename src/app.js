@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const saasEngine = require('node-sass-middleware');
 
 const routes = require('./routes');
+const Logger = require('./libs/Logger');
 
 const app = express();
 
@@ -43,6 +44,8 @@ app.use((req, res, next) => {
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, next) => {
   /* eslint-enable */
+
+  Logger.error('Unhandled error', err);
 
   const response = {
     error: {
