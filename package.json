@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "dev": "NODE_ENV=development DEBUG=gpm-play-server:* nodemon ./bin/www",
     "start": "node ./src/bin/www",
     "lint": "eslint . --fix --ext .js",
     "test": "istanbul cover --config ./coverage/.istanbul.yml _mocha -- --opts test/mocha.opts"
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "^2.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
     "sinon": "^1.17.7"
   }
 }

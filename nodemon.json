@@ -1,0 +1,9 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    "coverage",
+    "test",
+    "src/tmp",
+    "logs"
+  ]
+}
