@@ -17,5 +17,9 @@ coverage
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
 node_modules
 
+# sass compile
+*.css
+*.css.map
+
 tmp
 config/secret.json
