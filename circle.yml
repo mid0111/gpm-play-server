@@ -2,6 +2,10 @@ machine:
   node:
     version: 6
 
+dependencies:
+  pre:
+    - sudo apt-get install mpg321
+
 test:
   pre:
     - cp config/secret.json{.sample,}
