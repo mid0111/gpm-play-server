@@ -3,5 +3,7 @@ instrumentation:
     extensions:
         - .js
     include-all-sources: true
+    excludes: ['**/public/**']
+
 reporting:
     dir: ./coverage
