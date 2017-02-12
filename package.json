@@ -20,7 +20,6 @@
     "jsonconfig": "^0.3.0",
     "log4js": "^1.1.0",
     "morgan": "~1.7.0",
-    "node-sass-middleware": "0.8.0",
     "play-sound": "^1.1.1",
     "playmusic": "^2.2.1",
     "request": "^2.79.0",
