@@ -95,6 +95,41 @@ describe('MusicPlayer', () => {
     });
   });
 
+  describe('method', () => {
+    it('should call next without error', () => {
+      mockPlayListCreate();
+      mockPlayListSelect();
+      mockRequest();
+      mockPlayerPlay();
+
+
+      let musicPlayer;
+      return MusicPlayer.init()
+        .then((res) => {
+          musicPlayer = res;
+        })
+        .then(() => musicPlayer.play())
+        .then(() => musicPlayer.next());
+    });
+
+
+    it('should call stop without error', () => {
+      mockPlayListCreate();
+      mockPlayListSelect();
+      mockRequest();
+      mockPlayerPlay();
+
+
+      let musicPlayer;
+      return MusicPlayer.init()
+        .then((res) => {
+          musicPlayer = res;
+        })
+        .then(() => musicPlayer.play())
+        .then(() => musicPlayer.stop());
+    });
+  });
+
   afterEach(() => {
     sandbox.restore();
   });

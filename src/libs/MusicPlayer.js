@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const EventEmitter = require('events');
 const request = require('request');
 const player = require('play-sound')({});
 
@@ -13,6 +14,22 @@ class MusicPlayer {
 
   constructor(playList) {
     this.playList = playList;
+    this.event = new EventEmitter();
+
+    this.event.on('play', () => {
+      this.play();
+    });
+
+    this.event.on('stop', () => {
+      if (this.process) {
+        this.process.kill();
+      }
+    });
+
+    this.event.on('next', () => {
+      this.event.emit('stop');
+      this.event.emit('play');
+    });
   }
 
   static init() {
@@ -27,7 +44,15 @@ class MusicPlayer {
   play() {
     return this.playList.select()
       .then(MusicPlayer.downloadMusicFile)
-      .then(MusicPlayer.startPlayer);
+      .then(() => this.startPlayer());
+  }
+
+  next() {
+    this.event.emit('next');
+  }
+
+  stop() {
+    this.event.emit('stop');
   }
 
   static downloadMusicFile(streamUrl) {
@@ -38,17 +63,17 @@ class MusicPlayer {
     });
   }
 
-  static startPlayer() {
+  startPlayer() {
     return new Promise((resolve, reject) => {
       Logger.info('im playing...');
 
-      player.play(tmpFilePath, (err) => {
-        if (err) {
+      this.process = player.play(tmpFilePath, (err) => {
+        if (err && !err.killed) {
           Logger.error('Failed to start player.', err);
           reject(err);
         }
 
-        Logger.info('play done, switching to next one ...');
+        Logger.info('play done.');
         return resolve();
       });
     });
