@@ -36,7 +36,17 @@ class PlayList {
           if(err) throw err;
 
           console.log('all tracks length:', library.data.items.length);
-          resolve(library.data.items);
+
+          // Remove unused data
+          var playList = library.data.items.map((item) => {
+            return {
+              id: item.id,
+              artist: item.artist,
+              title: item.title
+            };
+          });
+
+          resolve(playList);
         });
       });
     });
