@@ -1,12 +1,12 @@
-var fs = require('fs-extra');
-var path = require('path');
-var request = require('request');
-var player = require('play-sound')(opts = {});
+const fs = require('fs-extra');
+const path = require('path');
+const request = require('request');
+const player = require('play-sound')({});
 
-var PlayList = require('./PlayList');
+const PlayList = require('./PlayList');
 
-var tmpFolder = path.join(__dirname, '../tmp');
-var tmpFilePath = path.join(tmpFolder, 'playing.mp3');
+const tmpFolder = path.join(__dirname, '../tmp');
+const tmpFilePath = path.join(tmpFolder, 'playing.mp3');
 
 class MusicPlayer {
 
@@ -20,31 +20,29 @@ class MusicPlayer {
 
     // Create instance
     return PlayList.create()
-      .then((playList) => new MusicPlayer(playList));
+      .then(playList => new MusicPlayer(playList));
   }
 
   play() {
     return this.playList.select()
-      .then(this._downloadMusicFile)
-      .then(this._play);
+      .then(this.downloadMusicFile)
+      .then(this.startPlayer);
   }
 
-  _downloadMusicFile(streamUrl) {
+  static downloadMusicFile(streamUrl) {
     return new Promise((resolve) => {
-      var writeStream = fs.createWriteStream(tmpFilePath);
-      writeStream.on('finish', () => {
-        return resolve(tmpFilePath);
-      });
+      const writeStream = fs.createWriteStream(tmpFilePath);
+      writeStream.on('finish', () => resolve(tmpFilePath));
       request.get(streamUrl).pipe(writeStream);
     });
   }
 
-  _play() {
+  static startPlayer() {
     return new Promise((resolve, reject) => {
       console.log('im playing...');
 
-      player.play(tmpFilePath, (err)=> {
-        if(err) reject(err);
+      player.play(tmpFilePath, (err) => {
+        if (err) reject(err);
 
         console.log('play done, switching to next one ...');
         return resolve();

@@ -1,11 +1,8 @@
-var PlayMusic = require('playmusic');
-var request = require('request');
-var fs = require('fs-extra');
-var path = require('path');
+const PlayMusic = require('playmusic');
+const secret = require('../../config/secret.json');
 
-var secret = require('../../config/secret.json');
-var email = secret.email;
-var password = secret.password;
+const email = secret.email;
+const password = secret.password;
 
 class PlayList {
 
@@ -15,36 +12,32 @@ class PlayList {
   }
 
   static create() {
-    var pm = new PlayMusic();
+    const pm = new PlayMusic();
     return this.getAllTracks(pm)
-      .then((songs) => new PlayList(pm, songs));
+      .then(songs => new PlayList(pm, songs));
   }
 
   static getAllTracks(pm) {
-    var playList = [];
-
     return new Promise((resolve) => {
       console.log('Get all tracks.');
 
       pm.init({
-        email: email,
-        password: password
-      }, (err, res) => {
-        if(err) throw err;
+        email,
+        password,
+      }, (err) => {
+        if (err) throw err;
 
-        pm.getAllTracks((err, library) => {
-          if(err) throw err;
+        pm.getAllTracks((getErr, library) => {
+          if (getErr) throw getErr;
 
           console.log('all tracks length:', library.data.items.length);
 
           // Remove unused data
-          var playList = library.data.items.map((item) => {
-            return {
-              id: item.id,
-              artist: item.artist,
-              title: item.title
-            };
-          });
+          const playList = library.data.items.map(item => ({
+            id: item.id,
+            artist: item.artist,
+            title: item.title,
+          }));
 
           resolve(playList);
         });
@@ -56,8 +49,8 @@ class PlayList {
     return new Promise((resolve) => {
       console.log('Select songs.');
 
-      var randomIndex = Math.floor(Math.random() * this.songs.length);
-      var song = this.songs[randomIndex];
+      const randomIndex = Math.floor(Math.random() * this.songs.length);
+      const song = this.songs[randomIndex];
 
       console.log('song:', `${song.artist} ${song.title}`);
 
@@ -68,7 +61,7 @@ class PlayList {
   getStreamUrl(song) {
     return new Promise((resolve) => {
       this.pm.getStreamUrl(song.id, (err, streamUrl) => {
-        if(err) throw err;
+        if (err) throw err;
         resolve(streamUrl);
       });
     });

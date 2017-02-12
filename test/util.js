@@ -1,14 +1,14 @@
-var path = require('path');
-var sinon = require('sinon');
+const path = require('path');
+const sinon = require('sinon');
 
-var paths = {
+const paths = {
   PlayList: path.join(__dirname, '../src/libs/PlayList'),
-  MusicPlayer: path.join(__dirname, '../src/libs/MusicPlayer')
+  MusicPlayer: path.join(__dirname, '../src/libs/MusicPlayer'),
 };
 
-var sandbox = sinon.sandbox.create();
+const sandbox = sinon.sandbox.create();
 
 module.exports = {
   paths,
-  sandbox
+  sandbox,
 };
