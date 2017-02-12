@@ -1,0 +1,34 @@
+{
+  "log": {
+    "development": {
+      "appenders": [
+        {
+          "type": "stdout"
+        },
+        {
+          "type": "file",
+          "filename": "logs/app.log",
+          "category": "app"
+        },
+        { "type": "file",
+          "filename": "logs/error.log",
+          "category": "error"
+        }
+      ]
+    },
+
+    "production": {
+      "appenders": [
+        {
+          "type": "file",
+          "filename": "logs/app.log",
+          "category": "app"
+        },
+        { "type": "file",
+          "filename": "logs/error.log",
+          "category": "error"
+        }
+      ]
+    }
+  }
+}

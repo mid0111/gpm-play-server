@@ -1,15 +1,16 @@
 const log4js = require('log4js');
 const fs = require('fs-extra');
+const path = require('path');
+const config = require('jsonconfig');
+
+config.load([path.join(__dirname, '../../config/log.json')]);
+
 
 // Create log directory when it does not exist.
 fs.mkdirsSync('logs');
 
-log4js.configure({
-  appenders: [
-    { type: 'file', filename: 'logs/app.log', category: 'app' },
-    { type: 'file', filename: 'logs/error.log', category: 'error' },
-  ],
-});
+const nodeEnv = process.env.NODE_ENV || 'production';
+log4js.configure(config.log[nodeEnv]);
 
 const appLogger = log4js.getLogger('app');
 const errorLogger = log4js.getLogger('error');
