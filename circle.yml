@@ -4,6 +4,7 @@ machine:
 
 test:
   pre:
+    - cp config/secret.json{.sample,}
     - npm run lint
 
 general:
