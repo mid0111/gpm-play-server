@@ -25,8 +25,8 @@ class MusicPlayer {
 
   play() {
     return this.playList.select()
-      .then(this.downloadMusicFile)
-      .then(this.startPlayer);
+      .then(MusicPlayer.downloadMusicFile)
+      .then(MusicPlayer.startPlayer);
   }
 
   static downloadMusicFile(streamUrl) {
