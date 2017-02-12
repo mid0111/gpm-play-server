@@ -1,7 +1,9 @@
 gpm-play-server
 ====
 
-Server for random playing from Google play music.
+Server for random playing from your Google play music library.  
+Make your audio system to be a Google play music client.  
+Connect audio system with server, and you can listen your audio system and operate (play, skip, stop...) from another machine through web UI!!
 
 [![CircleCI](https://circleci.com/gh/mid0111/gpm-play-server/tree/master.svg?style=svg)](https://circleci.com/gh/mid0111/gpm-play-server/tree/master)
 
@@ -16,3 +18,7 @@ vi config/secret.json
 
 npm start
 ```
+
+## Open web UI
+
+* Access to http://localhost:3000
