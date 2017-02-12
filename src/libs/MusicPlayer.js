@@ -22,6 +22,7 @@ class MusicPlayer {
 
     this.event.on('stop', () => {
       if (this.process) {
+        Logger.info('Stop playing.');
         this.process.kill();
       }
     });
@@ -44,7 +45,12 @@ class MusicPlayer {
   play() {
     return this.playList.select()
       .then(MusicPlayer.downloadMusicFile)
-      .then(() => this.startPlayer());
+      .then(() => this.startPlayer())
+      .then((res) => {
+        if (!res || !res.killed) {
+          this.event.emit('play');
+        }
+      });
   }
 
   next() {
@@ -71,6 +77,8 @@ class MusicPlayer {
         if (err && !err.killed) {
           Logger.error('Failed to start player.', err);
           reject(err);
+        } else if (err && err.killed) {
+          return resolve({ killed: true });
         }
 
         Logger.info('play done.');
