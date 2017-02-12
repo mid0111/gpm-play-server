@@ -3,7 +3,7 @@ var request = require('request');
 var fs = require('fs-extra');
 var path = require('path');
 
-var secret = require('../config/secret.json');
+var secret = require('../../config/secret.json');
 var email = secret.email;
 var password = secret.password;
 
