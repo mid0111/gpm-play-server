@@ -35,7 +35,7 @@ class MusicPlayer {
       writeStream.on('finish', () => {
         return resolve(tmpFilePath);
       });
-      request(streamUrl).pipe(writeStream);
+      request.get(streamUrl).pipe(writeStream);
     });
   }
 
