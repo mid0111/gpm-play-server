@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./src/bin/www",
     "lint": "eslint . --fix --ext .js",
-    "test": "mocha test/**/*.spec.js"
+    "test": "istanbul cover --config ./coverage/.istanbul.yml _mocha -- --opts test/mocha.opts"
   },
   "author": "mid0111",
   "license": "MIT",
@@ -30,6 +30,7 @@
     "eslint": "^3.15.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7"
   }

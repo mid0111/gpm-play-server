@@ -1,0 +1,7 @@
+instrumentation:
+    root: .
+    extensions:
+        - .js
+    include-all-sources: true
+reporting:
+    dir: ./coverage
