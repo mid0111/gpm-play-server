@@ -1,15 +1,14 @@
-gpm-play-server
+GCM Play Server [![CircleCI](https://circleci.com/gh/mid0111/gpm-play-server/tree/master.svg?style=svg)](https://circleci.com/gh/mid0111/gpm-play-server/tree/master)
+
 ====
 
-Server for random playing from your Google play music library.  
+Server for playing your Google play music library.  
 Make your audio system to be a Google play music client.  
-Connect audio system with server, then you can listen on your audio system and operate (play, skip, stop...) from another machine through web UI!!
-
-[![CircleCI](https://circleci.com/gh/mid0111/gpm-play-server/tree/master.svg?style=svg)](https://circleci.com/gh/mid0111/gpm-play-server/tree/master)
+Connect audio system to server, then you can listen google play music on your audio system and operate (play, skip, stop...) from another machine through web UI !!
 
 ## Requirement
 
-Gcm play server depends on [play-sound](https://github.com/shime/play-sound/blob/master/index.js).  
+GCM Play Server depends on [play-sound](https://github.com/shime/play-sound/blob/master/index.js).  
 To play audio, require audio player like mpg321, mpg123, aplay, etc...  
 See [play-sound options](https://github.com/shime/play-sound/blob/master/index.js) for more informations.
 
