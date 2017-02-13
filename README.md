@@ -25,4 +25,4 @@ npm start
 
 ## Open web UI
 
-* Access to http://localhost:3000
+* To open web UI open [http://localhost:3000](http://localhost:3000)
