@@ -7,6 +7,12 @@ Connect audio system with server, then you can listen on your audio system and o
 
 [![CircleCI](https://circleci.com/gh/mid0111/gpm-play-server/tree/master.svg?style=svg)](https://circleci.com/gh/mid0111/gpm-play-server/tree/master)
 
+## Requirement
+
+Gcm play server depends on [play-sound](https://github.com/shime/play-sound/blob/master/index.js).  
+To play audio, require audio player like mpg321, mpg123, aplay, etc...  
+See [play-sound options](https://github.com/shime/play-sound/blob/master/index.js) for more informations.
+
 ## Install
 
 ```bash
