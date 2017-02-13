@@ -1,5 +1,4 @@
 GCM Play Server [![CircleCI](https://circleci.com/gh/mid0111/gpm-play-server/tree/master.svg?style=svg)](https://circleci.com/gh/mid0111/gpm-play-server/tree/master)
-
 ====
 
 Server for playing your Google play music library.  
