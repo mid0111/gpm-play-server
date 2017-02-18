@@ -30,7 +30,8 @@ var gpm = gpm || {};
     });
   }
 
-  var socket = io('http://localhost:3000');
+  var baseUrl = location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/";
+  var socket = io(baseUrl);
   socket.on('song', function (data) {
     artistName.text(data.artist);
     musicTitle.text(data.title);
