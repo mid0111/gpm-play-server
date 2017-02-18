@@ -1,6 +1,9 @@
 var gpm = gpm || {};
 
 (function () {
+  var artistName = $('#artist-name');
+  var musicTitle = $('#music-title');
+
   gpm.onPlay = function () {
     request('play');
   };
@@ -11,6 +14,8 @@ var gpm = gpm || {};
 
   gpm.onStop = function () {
     request('stop');
+    artistName.text('');
+    musicTitle.text('');
   };
 
   function request(action) {
@@ -24,4 +29,10 @@ var gpm = gpm || {};
       }),
     });
   }
+
+  var socket = io('http://localhost:3000');
+  socket.on('song', function (data) {
+    artistName.text(data.artist);
+    musicTitle.text(data.title);
+  });
 }());

@@ -31,7 +31,10 @@ describe('MusicPlayer', () => {
   }
 
   function mockPlayListSelect() {
-    sandbox.stub(PlayList.prototype, 'select', () => Promise.resolve(streamUrl));
+    sandbox.stub(PlayList.prototype, 'select', () => Promise.resolve({
+      streamUrl,
+      song: playList[0],
+    }));
   }
 
   function mockRequest() {
@@ -134,4 +137,3 @@ describe('MusicPlayer', () => {
     sandbox.restore();
   });
 });
-

@@ -6,6 +6,7 @@ const player = require('play-sound')({});
 
 const Logger = require('./Logger');
 const PlayList = require('./PlayList');
+const PlayInfo = require('./PlayInfo');
 
 const tmpFolder = path.join(__dirname, '../tmp');
 const tmpFilePath = path.join(tmpFolder, 'playing.mp3');
@@ -44,7 +45,10 @@ class MusicPlayer {
 
   play() {
     return this.playList.select()
-      .then(MusicPlayer.downloadMusicFile)
+      .then((res) => {
+        PlayInfo.send(res.song.artist, res.song.title);
+        return MusicPlayer.downloadMusicFile(res.streamUrl);
+      })
       .then(() => this.startPlayer())
       .then((res) => {
         if (!res || !res.killed) {
@@ -78,7 +82,9 @@ class MusicPlayer {
           Logger.error('Failed to start player.', err);
           reject(err);
         } else if (err && err.killed) {
-          return resolve({ killed: true });
+          return resolve({
+            killed: true,
+          });
         }
 
         Logger.info('play done.');
