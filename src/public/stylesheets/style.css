@@ -1,6 +1,10 @@
+.navbar-brand {
+  padding: 16px 15px;
+}
+
 .navbar-brand>img {
   display: inline-block;
-  height: 24px;
+  height: 32px;
 }
 
 .player .btn {
