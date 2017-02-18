@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <title><%= title %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>
+      <%= title %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta charset="utf-8">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
 
-    <div class="main">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="*" src="https://mid0111.github.io/stickers/assets/images/uzumaru-2/01.png">
+            <%= title %>
+          </a>
+        </div>
+      </div>
+    </nav>
 
-      <div class="player">
-        <button type="button" onclick="gpm.onPlay()">Play</button>
-        <button type="button" onclick="gpm.onNext()">Next</button>
-        <button type="button" onclick="gpm.onStop()">Stop</button>
+    <div class="main container-fluid">
+
+      <div class="panel panel-default music-info">
+        <div class="panel-heading">Now playing...</div>
+        <div class="player panel-body">
+          <h4><small><span id="artist-name"></span></small> <span id="music-title"></span></h4>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="player panel-body">
+          <button class="btn btn-primary" type="button" onclick="gpm.onPlay()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span>Play</button>
+          <button class="btn btn-default" type="button" onclick="gpm.onNext()"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>Next</button>
+          <button class="btn btn-default" type="button" onclick="gpm.onStop()"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span>Stop</button>
+        </div>
       </div>
 
     </div>
 
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/socket.io.min.js"></script>
     <script src="/javascripts/app.js" charset="utf-8"></script>
   </body>
+
 </html>
