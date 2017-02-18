@@ -75,7 +75,7 @@ describe('PlayList', () => {
       return PlayList.create()
         .then(playList => playList.select())
         .then((res) => {
-          expect(res).to.equal(streamUrl);
+          expect(res.streamUrl).to.equal(streamUrl);
         });
     });
 
@@ -97,4 +97,3 @@ describe('PlayList', () => {
     sandbox.restore();
   });
 });
-

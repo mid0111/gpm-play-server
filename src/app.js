@@ -4,6 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const http = require('http');
 
 const routes = require('./routes');
 const Logger = require('./libs/Logger');
@@ -18,7 +19,9 @@ app.set('view engine', 'ejs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false,
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -54,4 +57,28 @@ app.use((err, req, res, next) => {
   res.json(response);
 });
 
-module.exports = app;
+/**
+ * Get port from environment and store in Express.
+ */
+const port = 3000;
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app);
+server.listen(port);
+
+/**
+ * Create Socket server.
+ */
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  socket.on('song', (data) => {
+    // broadcast
+    io.emit('song', data);
+  });
+});
+
+module.exports = server;

@@ -72,7 +72,10 @@ class PlayList {
           Logger.error('Failed to get stream url.', err);
           throw err;
         }
-        resolve(streamUrl);
+        resolve({
+          streamUrl,
+          song,
+        });
       });
     });
   }
