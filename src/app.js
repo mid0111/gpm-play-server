@@ -74,9 +74,14 @@ server.listen(port);
  */
 const io = require('socket.io')(server);
 
+let nowPlaying;
 io.on('connection', (socket) => {
+  if (nowPlaying) {
+    io.emit('song', nowPlaying);
+  }
   socket.on('song', (data) => {
     // broadcast
+    nowPlaying = data;
     io.emit('song', data);
   });
 });
