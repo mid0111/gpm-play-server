@@ -1,6 +1,8 @@
 GCM Play Server [![CircleCI](https://circleci.com/gh/mid0111/gpm-play-server/tree/master.svg?style=svg)](https://circleci.com/gh/mid0111/gpm-play-server/tree/master)
 ====
 
+![](screenshot.png)
+
 Server for playing your Google play music library.  
 Make your audio system to be a Google play music client.  
 Connect audio system to server, then you can listen google play music on your audio system and operate (play, skip, stop...) from another machine through web UI !!
